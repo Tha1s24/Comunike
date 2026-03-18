@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunike — Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/chat.css">
+</head>
+<body class="page-chat">
+
+  <div class="chat-layout">
+
+    <!-- SIDEBAR DE MEMBROS -->
+    <aside class="chat-sidebar" id="chat-sidebar" role="complementary" aria-label="Informações da sala">
+      <div class="sidebar-topo">
+        <a href="salas.html" class="btn-voltar" aria-label="Voltar para lista de salas">← Salas</a>
+        <button class="btn-icon" id="btn-fechar-sidebar" type="button" aria-label="Fechar painel" aria-expanded="true">✕</button>
+      </div>
+      <div class="sala-info" id="sala-info" aria-live="polite"></div>
+      <div class="membros-titulo">
+        <span>Participantes</span>
+        <span class="membros-contador" id="membros-contador">1</span>
+      </div>
+      <ul class="membros-lista" id="membros-lista" role="list" aria-label="Usuários na sala"></ul>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <div class="chat-principal">
+
+      <!-- Header -->
+      <header class="chat-header" role="banner">
+        <button class="btn-icon" id="btn-membros" type="button" aria-label="Mostrar membros" aria-expanded="false">
+          <span aria-hidden="true">👥</span>
+        </button>
+        <div class="chat-header-info" aria-live="polite">
+          <div class="chat-header-nome" id="chat-header-nome">Carregando...</div>
+          <div class="chat-header-online" id="chat-header-online"></div>
+        </div>
+        <div class="chat-header-acoes">
+          <button class="btn-theme" id="btn-theme" type="button" aria-label="Alternar tema">◐</button>
+        </div>
+      </header>
+
+      <!-- Área de mensagens -->
+      <main
+        class="chat-mensagens"
+        id="chat-mensagens"
+        role="log"
+        aria-label="Mensagens da sala"
+        aria-live="polite"
+        aria-relevant="additions"
+        tabindex="0"
+      ></main>
+
+      <!-- Indicador de digitação -->
+      <div class="typing-indicator" id="typing-indicator" role="status" aria-live="polite" aria-atomic="true"></div>
+
+      <!-- Rodapé de input -->
+      <footer class="chat-rodape" role="contentinfo">
+
+        <!-- Preview de arquivo/imagem selecionado -->
+        <div class="arquivo-preview" id="arquivo-preview" hidden>
+          <span class="arquivo-preview-icone" id="arquivo-preview-icone" aria-hidden="true">📎</span>
+          <span class="arquivo-preview-nome"  id="arquivo-preview-nome"></span>
+          <button type="button" class="arquivo-preview-remover" id="arquivo-preview-remover" aria-label="Remover arquivo">✕</button>
+        </div>
+
+        <!-- Preview de gravação de voz -->
+        <div class="voz-preview" id="voz-preview" hidden>
+          <span class="voz-preview-icone" aria-hidden="true">🎙️</span>
+          <div class="voz-timer" id="voz-timer">00:00</div>
+          <div class="voz-ondas" id="voz-ondas" aria-hidden="true">
+            <span class="onda"></span>
+            <span class="onda"></span>
+            <span class="onda"></span>
+            <span class="onda"></span>
+            <span class="onda"></span>
+          </div>
+          <button type="button" class="voz-parar" id="voz-parar" aria-label="Parar gravação e enviar">Enviar ↑</button>
+          <button type="button" class="voz-cancelar" id="voz-cancelar" aria-label="Cancelar gravação">✕</button>
+        </div>
+
+        <!-- Linha de input principal -->
+        <div class="msg-linha" id="msg-linha">
+
+          <!-- Emoji -->
+          <button type="button" class="btn-acao-msg" id="btn-emoji-toggle"
+            aria-label="Abrir emojis" aria-haspopup="true" aria-expanded="false" title="Emojis">😊</button>
+
+          <!-- Upload de arquivo/imagem -->
+          <button type="button" class="btn-acao-msg" id="btn-upload"
+            aria-label="Enviar arquivo ou imagem" title="Arquivo ou imagem">📎</button>
+          <input type="file" id="inp-arquivo"
+            accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt,.zip"
+            aria-label="Selecionar arquivo" class="sr-only">
+
+          <!-- Campo de texto -->
+          <label for="inp-msg" class="sr-only">Digite sua mensagem</label>
+          <input
+            type="text"
+            id="inp-msg"
+            name="mensagem"
+            class="msg-input"
+            placeholder="Mensagem..."
+            maxlength="500"
+            autocomplete="off"
+            aria-describedby="chars-contador"
+          >
+
+          <!-- Contador de caracteres -->
+          <span class="chars-contador" id="chars-contador" aria-live="polite" aria-atomic="true">500</span>
+
+          <!-- Botão de voz (substitui enviar quando campo vazio) -->
+          <button type="button" class="btn-voz" id="btn-voz"
+            aria-label="Gravar mensagem de voz" title="Mensagem de voz">🎙️</button>
+
+          <!-- Botão enviar (aparece quando há texto) -->
+          <button type="button" class="btn-enviar btn-enviar--oculto" id="btn-enviar" aria-label="Enviar mensagem">
+            <span aria-hidden="true">↑</span>
+          </button>
+
+        </div>
+
+        <!-- Emoji picker -->
+        <div class="emoji-picker" id="emoji-picker" role="dialog" aria-label="Seletor de emojis" hidden>
+          <div class="emoji-categorias" id="emoji-categorias"></div>
+          <div class="emoji-grid"       id="emoji-grid"       role="list"></div>
+        </div>
+
+      </footer>
+    </div>
+  </div>
+
+  <!-- Lightbox para imagens -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Visualizar imagem" hidden>
+    <button type="button" class="lightbox-fechar" id="lightbox-fechar" aria-label="Fechar imagem">✕</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="Imagem ampliada">
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-container" id="toast-container" role="region" aria-label="Notificações" aria-live="assertive"></div>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/chat.js"></script>
+</body>
+</html>

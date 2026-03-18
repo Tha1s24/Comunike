@@ -1,0 +1,476 @@
+/* ============================================
+   COMUNIKE — css/chat.css
+   ============================================ */
+
+.page-chat { height: 100vh; overflow: hidden; }
+
+.chat-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: 100vh;
+}
+
+/* ---- SIDEBAR ---- */
+.chat-sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width var(--transition);
+}
+.chat-sidebar.recolhida { width: 0; overflow: hidden; }
+
+.sidebar-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  min-height: 58px;
+}
+.btn-voltar {
+  font-size: 13px; font-weight: 600;
+  color: var(--text2);
+  display: flex; align-items: center; gap: 5px;
+  transition: color var(--transition);
+}
+.btn-voltar:hover { color: var(--accent); }
+
+.sala-info { padding: 14px 14px 10px; border-bottom: 1px solid var(--border); }
+.sala-info-nome {
+  font-family: var(--font-head);
+  font-size: 1rem; font-weight: 700;
+  margin-bottom: 4px; color: var(--text);
+}
+.sala-info-cat {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 20px;
+  background: var(--cat-bg, var(--bg2));
+  color: var(--cat, var(--text3));
+}
+
+.membros-titulo {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 6px;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text3);
+}
+.membros-contador {
+  background: var(--green-dim); color: var(--green);
+  font-size: 11px; font-weight: 700;
+  padding: 2px 8px; border-radius: 10px;
+}
+
+.membros-lista { flex: 1; overflow-y: auto; padding: 4px 8px; }
+.membro-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px; border-radius: 10px; font-size: 13px;
+  transition: background var(--transition);
+}
+.membro-item:hover { background: var(--bg2); }
+.membro-avatar  { font-size: 20px; line-height: 1; }
+.membro-apelido { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.membro-criador {
+  font-size: 10px; color: var(--accent); font-weight: 700;
+  background: var(--accent-dim); padding: 2px 7px; border-radius: 5px;
+}
+
+/* ---- ÁREA PRINCIPAL ---- */
+.chat-principal { display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
+
+.chat-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 16px; background: var(--surface);
+  border-bottom: 1px solid var(--border); min-height: 58px;
+}
+.chat-header-info { flex: 1; }
+.chat-header-nome   { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--text); }
+.chat-header-online { font-size: 12px; color: var(--text3); }
+.chat-header-acoes  { display: flex; gap: 6px; }
+
+/* ---- MENSAGENS ---- */
+.chat-mensagens {
+  flex: 1; overflow-y: auto;
+  padding: 1.2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 2px;
+}
+
+.msg-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 5px 8px; border-radius: 10px;
+  animation: msgEntrar 0.18s ease;
+  transition: background var(--transition);
+}
+.msg-item:hover { background: var(--surface); }
+
+@keyframes msgEntrar {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.msg-avatar { font-size: 24px; line-height: 1; flex-shrink: 0; margin-top: 1px; }
+.msg-corpo  { flex: 1; min-width: 0; }
+.msg-cabecalho { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
+.msg-apelido   { font-size: 13px; font-weight: 700; color: var(--text); }
+.msg-voce      { font-size: 10px; color: var(--text3); font-weight: 400; margin-left: 2px; }
+.msg-hora      { font-size: 11px; color: var(--text3); }
+.msg-texto     { font-size: 14px; line-height: 1.6; color: var(--text); word-break: break-word; display: block; }
+.msg-emoji-grande { font-size: 36px; line-height: 1; display: block; }
+
+.msg-acoes { opacity: 0; transition: opacity var(--transition); margin-left: auto; flex-shrink: 0; }
+.msg-item:hover .msg-acoes { opacity: 1; }
+.btn-del-msg {
+  background: transparent; border: 1px solid var(--border2);
+  cursor: pointer; color: var(--text3);
+  font-size: 11px; padding: 3px 7px; border-radius: 6px;
+  transition: all var(--transition);
+}
+.btn-del-msg:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+
+/* Imagem na mensagem */
+.msg-imagem-wrap { margin-top: 4px; }
+.msg-imagem {
+  max-width: 260px; max-height: 200px;
+  border-radius: 10px; cursor: zoom-in;
+  border: 1px solid var(--border);
+  object-fit: cover;
+  transition: opacity var(--transition);
+}
+.msg-imagem:hover { opacity: 0.9; }
+
+/* Arquivo genérico */
+.msg-arquivo {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 10px; padding: 10px 12px;
+  margin-top: 4px; max-width: 280px;
+}
+.msg-arquivo-ext {
+  background: var(--accent-dim); color: var(--accent);
+  font-size: 11px; font-weight: 700;
+  padding: 4px 8px; border-radius: 6px; flex-shrink: 0;
+}
+.msg-arquivo-info { flex: 1; min-width: 0; }
+.msg-arquivo-nome { font-size: 13px; font-weight: 600; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.msg-arquivo-tam  { font-size: 11px; color: var(--text3); }
+.msg-arquivo-baixar {
+  font-size: 16px; color: var(--text2); flex-shrink: 0;
+  transition: color var(--transition);
+}
+.msg-arquivo-baixar:hover { color: var(--accent); }
+
+.msg-sistema {
+  text-align: center; font-size: 12px;
+  color: var(--text3); padding: 6px 0; font-style: italic;
+}
+
+/* Drag over */
+.chat-mensagens.drag-over {
+  outline: 2px dashed var(--accent);
+  outline-offset: -8px;
+  background: var(--accent-dim);
+}
+
+/* ---- TYPING INDICATOR ---- */
+.typing-indicator {
+  min-height: 22px; padding: 0 1.5rem 4px;
+  font-size: 12px; color: var(--text3); font-style: italic;
+}
+
+/* ---- RODAPÉ ---- */
+.chat-rodape {
+  position: relative; background: var(--surface);
+  border-top: 1px solid var(--border); padding: 10px 14px;
+}
+
+/* Preview de arquivo */
+.arquivo-preview {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: 8px; padding: 6px 10px;
+  margin-bottom: 8px; font-size: 13px;
+}
+.arquivo-preview[hidden] { display: none; }
+.arquivo-preview-icone { font-size: 16px; }
+.arquivo-preview-nome  { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text2); }
+.arquivo-preview-remover {
+  background: transparent; border: none; cursor: pointer;
+  color: var(--text3); font-size: 13px; padding: 2px 5px;
+  border-radius: 4px; flex-shrink: 0;
+  transition: color var(--transition);
+}
+.arquivo-preview-remover:hover { color: var(--accent); }
+
+/* Linha de input */
+.msg-linha {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg2);
+  border: 1.5px solid var(--border2);
+  border-radius: 14px;
+  padding: 4px 6px 4px 10px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.msg-linha:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.btn-acao-msg {
+  background: transparent; border: none;
+  cursor: pointer; font-size: 20px;
+  padding: 4px; border-radius: 8px; line-height: 1;
+  flex-shrink: 0; color: var(--text2);
+  transition: transform var(--transition), background var(--transition);
+}
+.btn-acao-msg:hover { transform: scale(1.15); background: var(--bg); }
+
+.msg-input {
+  flex: 1; background: transparent; border: none;
+  color: var(--text); font-family: var(--font-body);
+  font-size: 14px; padding: 8px 4px; outline: none;
+  min-width: 0;
+}
+.msg-input::placeholder { color: var(--text3); }
+
+.chars-contador {
+  font-size: 11px; color: var(--text3);
+  min-width: 28px; text-align: right; flex-shrink: 0;
+}
+.chars-contador.baixo { color: #e6a817; font-weight: 600; }
+.chars-contador.over  { color: var(--accent); font-weight: 700; }
+
+.btn-enviar {
+  width: 38px; height: 38px; flex-shrink: 0;
+  background: var(--accent); border: none;
+  border-radius: 10px; color: #fff; font-size: 17px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.btn-enviar:hover  { background: var(--accent-hov); box-shadow: 0 3px 10px rgba(232,75,58,0.35); }
+.btn-enviar:active { transform: scale(0.93); }
+
+/* ---- EMOJI PICKER ---- */
+.emoji-picker {
+  position: absolute; bottom: calc(100% + 10px); left: 14px;
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 16px; padding: 10px;
+  box-shadow: var(--shadow-lg); z-index: 200; width: 300px;
+  animation: emojiEntrar 0.15s ease;
+}
+.emoji-picker[hidden] { display: none; }
+@keyframes emojiEntrar {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Abas de categoria */
+.emoji-categorias {
+  display: flex; gap: 4px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border); padding-bottom: 8px;
+}
+.emoji-cat-btn {
+  background: transparent; border: none;
+  font-size: 18px; padding: 5px 7px; border-radius: 8px;
+  cursor: pointer; line-height: 1;
+  transition: background var(--transition), transform var(--transition);
+}
+.emoji-cat-btn:hover { background: var(--bg2); transform: scale(1.1); }
+.emoji-cat-btn.ativo { background: var(--accent-dim); }
+
+/* Grid de emojis */
+.emoji-grid {
+  display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px;
+  max-height: 160px; overflow-y: auto;
+}
+.emoji-btn {
+  background: transparent; border: none;
+  font-size: 20px; padding: 5px; border-radius: 7px;
+  cursor: pointer; text-align: center; line-height: 1;
+  transition: background var(--transition), transform var(--transition);
+}
+.emoji-btn:hover { background: var(--bg2); transform: scale(1.18); }
+
+/* ---- LIGHTBOX ---- */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.88);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 3000;
+}
+.lightbox[hidden] { display: none; }
+.lightbox-img {
+  max-width: 90vw; max-height: 90vh;
+  border-radius: 12px; object-fit: contain;
+}
+.lightbox-fechar {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: rgba(255,255,255,0.12); border: none;
+  color: #fff; font-size: 20px; width: 40px; height: 40px;
+  border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition);
+}
+.lightbox-fechar:hover { background: rgba(255,255,255,0.25); }
+
+/* ---- RESPONSIVO ---- */
+@media (max-width: 700px) {
+  .chat-layout { grid-template-columns: 1fr; }
+  .chat-sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0;
+    width: 260px; z-index: 300;
+    transform: translateX(-100%);
+    transition: transform var(--transition);
+  }
+  .chat-sidebar.aberta   { transform: translateX(0); }
+  .chat-sidebar.recolhida { transform: translateX(-100%); }
+}
+
+/* ============================================
+   ADIÇÕES: VOZ, UPLOAD, ÁUDIO, IMAGEM
+   ============================================ */
+
+/* Botão enviar oculto quando campo vazio */
+.btn-enviar--oculto { display: none; }
+.btn-enviar--visivel { display: flex; }
+
+/* Botão de voz */
+.btn-voz {
+  background: transparent; border: none;
+  cursor: pointer; font-size: 20px;
+  padding: 4px 6px; border-radius: 8px; line-height: 1;
+  flex-shrink: 0; color: var(--text2);
+  transition: transform var(--transition), background var(--transition), color var(--transition);
+}
+.btn-voz:hover          { transform: scale(1.15); background: var(--bg); color: var(--accent); }
+.btn-voz.gravando       { color: var(--accent); animation: pulsar 1s ease infinite; }
+@keyframes pulsar {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%       { transform: scale(1.18); opacity: 0.7; }
+}
+
+/* Preview de gravação de voz */
+.voz-preview {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--accent-dim);
+  border: 1.5px solid var(--accent);
+  border-radius: 12px; padding: 8px 12px;
+  margin-bottom: 8px;
+  animation: aparecer 0.2s ease;
+}
+.voz-preview[hidden] { display: none; }
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.voz-preview-icone { font-size: 18px; flex-shrink: 0; }
+
+.voz-timer {
+  font-size: 13px; font-weight: 700;
+  color: var(--accent); font-family: var(--font-body);
+  min-width: 38px;
+}
+
+/* Ondas animadas de voz */
+.voz-ondas {
+  display: flex; align-items: center; gap: 3px;
+  flex: 1;
+}
+.onda {
+  width: 3px; border-radius: 3px;
+  background: var(--accent); opacity: 0.8;
+  animation: onda 0.8s ease infinite;
+}
+.onda:nth-child(1) { height: 8px;  animation-delay: 0s;    }
+.onda:nth-child(2) { height: 14px; animation-delay: 0.1s;  }
+.onda:nth-child(3) { height: 20px; animation-delay: 0.2s;  }
+.onda:nth-child(4) { height: 14px; animation-delay: 0.3s;  }
+.onda:nth-child(5) { height: 8px;  animation-delay: 0.4s;  }
+@keyframes onda {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+  50%       { transform: scaleY(1);   opacity: 1;   }
+}
+
+.voz-parar {
+  background: var(--accent); color: #fff; border: none;
+  border-radius: 8px; padding: 5px 12px;
+  font-size: 12px; font-weight: 700;
+  font-family: var(--font-body); cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+.voz-parar:hover { background: var(--accent-hov); }
+
+.voz-cancelar {
+  background: transparent; border: 1px solid var(--border2);
+  color: var(--text2); width: 28px; height: 28px;
+  border-radius: 7px; font-size: 12px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+.voz-cancelar:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+
+/* Mensagem de áudio */
+.msg-audio-wrap {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 12px; padding: 10px 14px;
+  margin-top: 4px; max-width: 320px;
+}
+.msg-audio-icone { font-size: 22px; flex-shrink: 0; color: var(--accent); }
+.msg-audio-player {
+  flex: 1; min-width: 0;
+  height: 32px;
+  accent-color: var(--accent);
+}
+.msg-audio-player::-webkit-media-controls-panel {
+  background: var(--surface2);
+}
+.msg-audio-dur {
+  font-size: 11px; color: var(--text3);
+  flex-shrink: 0; min-width: 32px; text-align: right;
+}
+
+/* Mensagem de imagem */
+.msg-imagem-wrap { margin-top: 4px; position: relative; display: inline-block; }
+.msg-imagem {
+  max-width: 280px; max-height: 220px;
+  border-radius: 12px; cursor: zoom-in;
+  border: 1px solid var(--border);
+  object-fit: cover; display: block;
+  transition: opacity var(--transition), transform var(--transition);
+}
+.msg-imagem:hover { opacity: 0.92; transform: scale(1.01); }
+
+/* Mensagem de arquivo genérico */
+.msg-arquivo {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 12px; padding: 10px 14px;
+  margin-top: 4px; max-width: 300px;
+  transition: border-color var(--transition);
+}
+.msg-arquivo:hover { border-color: var(--accent); }
+.msg-arquivo-ext {
+  background: var(--accent-dim); color: var(--accent);
+  font-size: 11px; font-weight: 700;
+  padding: 4px 8px; border-radius: 6px; flex-shrink: 0;
+}
+.msg-arquivo-info { flex: 1; min-width: 0; }
+.msg-arquivo-nome { font-size: 13px; font-weight: 600; color: var(--text); display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.msg-arquivo-tam  { font-size: 11px; color: var(--text3); }
+.msg-arquivo-baixar {
+  font-size: 18px; color: var(--text3); flex-shrink: 0;
+  padding: 4px; border-radius: 6px;
+  transition: color var(--transition), background var(--transition);
+}
+.msg-arquivo-baixar:hover { color: var(--accent); background: var(--accent-dim); }

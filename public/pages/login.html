@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunike — Entrar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="page-auth">
+
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+  </div>
+
+  <main role="main">
+    <div class="auth-layout">
+
+      <!-- PAINEL ESQUERDO DECORATIVO -->
+      <div class="auth-painel-esq" aria-hidden="true">
+        <div class="brand-esq">
+          <span class="brand-esq-icon">◈</span>
+          <span class="brand-esq-nome">Comunike</span>
+        </div>
+        <p class="auth-slogan">
+          Encontre sua <em>tribo.</em><br>
+          Compartilhe sua paixão.
+        </p>
+        <div class="auth-destaques">
+          <div class="auth-destaque-item">
+            <span class="auth-destaque-icone">⚡</span>
+            Chat em tempo real
+          </div>
+          <div class="auth-destaque-item">
+            <span class="auth-destaque-icone">🏠</span>
+            Salas por hobby
+          </div>
+          <div class="auth-destaque-item">
+            <span class="auth-destaque-icone">👥</span>
+            Comunidade ativa
+          </div>
+        </div>
+      </div>
+
+      <!-- PAINEL DIREITO: FORMULÁRIO -->
+      <div class="auth-painel-dir">
+        <div class="auth-topo-dir">
+          <button class="btn-theme" id="btn-theme" type="button" aria-label="Alternar tema">◐</button>
+        </div>
+
+        <h1 class="auth-titulo">Bem-vindo de volta</h1>
+        <p class="auth-subtitulo">
+          Não tem conta? <a href="cadastro.html">Criar grátis</a>
+        </p>
+
+        <!-- Apelido fora do form para evitar submit acidental -->
+        <div class="form-group">
+          <label for="inp-apelido" class="form-label">Apelido</label>
+          <input
+            type="text"
+            id="inp-apelido"
+            name="apelido"
+            class="form-input"
+            placeholder="Como quer ser chamado?"
+            maxlength="24"
+            autocomplete="nickname"
+            aria-required="true"
+            aria-describedby="hint-apelido erro-apelido"
+          >
+          <span id="hint-apelido" class="form-hint">Máximo 24 caracteres, sem espaços.</span>
+          <span id="erro-apelido" class="form-error" role="alert" aria-live="polite"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="inp-senha-login" class="form-label">Senha</label>
+          <input
+            type="password"
+            id="inp-senha-login"
+            name="senha"
+            class="form-input"
+            placeholder="Sua senha"
+            autocomplete="current-password"
+            aria-required="true"
+            aria-describedby="erro-senha-login"
+          >
+          <span id="erro-senha-login" class="form-error" role="alert" aria-live="polite"></span>
+        </div>
+
+        <button type="button" class="btn-submit" id="btn-entrar" aria-label="Entrar na Comunike">
+          Entrar <span aria-hidden="true">→</span>
+        </button>
+
+        <p class="auth-footer-link">
+          Não tem conta? <a href="cadastro.html">Criar conta grátis</a>
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="toast-container" role="region" aria-label="Notificações" aria-live="assertive"></div>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/login.js"></script>
+</body>
+</html>

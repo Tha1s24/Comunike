@@ -1,0 +1,415 @@
+/* ============================================
+   COMUNIKE — css/auth.css
+   Login e Cadastro — visual moderno
+   ============================================ */
+
+.page-auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+}
+
+/* ---- LAYOUT DOIS PAINÉIS (login) ---- */
+.auth-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 880px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Painel esquerdo — decorativo */
+.auth-painel-esq {
+  background: var(--accent);
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.auth-painel-esq .brand-esq {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.auth-painel-esq .brand-esq-icon { font-size: 28px; color: #fff; }
+.auth-painel-esq .brand-esq-nome {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+.auth-painel-esq .auth-slogan {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.auth-painel-esq .auth-slogan em {
+  font-style: italic;
+  opacity: 0.75;
+}
+.auth-painel-esq .auth-destaques {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.auth-destaque-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+}
+.auth-destaque-icone {
+  width: 30px;
+  height: 30px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+/* Painel direito — formulário */
+.auth-painel-dir {
+  background: var(--surface);
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ---- CARD SIMPLES (cadastro) ---- */
+.auth-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 500px;
+}
+.auth-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2.8rem 2.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---- CABEÇALHO ---- */
+.auth-titulo {
+  font-family: var(--font-head);
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.auth-subtitulo {
+  font-size: 13px;
+  color: var(--text3);
+  margin-bottom: 2rem;
+}
+.auth-subtitulo a {
+  color: var(--accent);
+  font-weight: 600;
+}
+.auth-subtitulo a:hover { text-decoration: underline; }
+
+/* ---- CAMPOS ---- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+.form-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.form-label-opt {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text3);
+}
+.form-input {
+  width: 100%;
+  background: var(--bg2);
+  border: 1.5px solid var(--border2);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+.form-input:focus {
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.form-input::placeholder { color: var(--text3); }
+.form-hint  { font-size: 11px; color: var(--text3); }
+.form-error { font-size: 12px; color: var(--accent); min-height: 16px; display: block; }
+
+/* ---- AVATAR ---- */
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  margin-top: 6px;
+}
+.avatar-btn {
+  background: var(--bg2);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  aspect-ratio: 1;
+  width: 100%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+.avatar-btn:hover  { background: var(--bg); transform: scale(1.1); }
+.avatar-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  transform: scale(1.05);
+}
+
+/* ---- HOBBIES ---- */
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+.hobby-btn {
+  background: var(--bg2);
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  padding: 10px 4px;
+  font-size: 12px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--text2);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--transition);
+  text-align: center;
+  line-height: 1.3;
+}
+.hobby-btn .hobby-icon { font-size: 20px; }
+.hobby-btn:hover  { border-color: var(--border2); color: var(--text); background: var(--bg); }
+.hobby-btn.active {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---- FORÇA DA SENHA ---- */
+.senha-forca {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+.forca-bar {
+  height: 4px;
+  flex: 1;
+  border-radius: 4px;
+  background: var(--border2);
+  transition: background 0.3s;
+}
+.forca-label {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 5px;
+  text-align: right;
+}
+
+/* ---- BOTÃO SUBMIT ---- */
+.btn-submit {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.btn-submit:hover  {
+  background: var(--accent-hov);
+  box-shadow: 0 4px 16px rgba(232,75,58,0.35);
+}
+.btn-submit:active { transform: scale(0.98); }
+
+/* ---- LINKS ---- */
+.auth-footer-link {
+  text-align: center;
+  margin-top: 1.4rem;
+  font-size: 13px;
+  color: var(--text3);
+}
+.auth-footer-link--top {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}
+.auth-footer-link a { color: var(--accent); font-weight: 600; }
+.auth-footer-link a:hover { text-decoration: underline; }
+
+/* ---- SELECT WRAP ---- */
+.select-wrap { position: relative; }
+.select-wrap::after {
+  content: "▾";
+  position: absolute; right: 14px; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text3); font-size: 12px;
+}
+.form-select {
+  width: 100%;
+  background: var(--bg2);
+  border: 1.5px solid var(--border2);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 12px 36px 12px 16px;
+  border-radius: 10px;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+.form-select:focus { border-color: var(--accent); }
+
+/* ---- RESPONSIVO ---- */
+@media (max-width: 700px) {
+  .auth-layout { grid-template-columns: 1fr; }
+  .auth-painel-esq { display: none; }
+  .auth-painel-dir { padding: 2.5rem 2rem; border-radius: 20px; }
+}
+@media (max-width: 480px) {
+  .auth-card { padding: 2rem 1.5rem; }
+  .hobbies-grid { grid-template-columns: repeat(3, 1fr); }
+  .avatar-grid  { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---- TOPO DO PAINEL DIREITO (botão tema) ---- */
+.auth-topo-dir {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+/* ---- MINI MODAL DE SUCESSO ---- */
+.modal-sucesso-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+  animation: overlayIn 0.2s ease;
+}
+.modal-sucesso-overlay[hidden] { display: none; }
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal-sucesso {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  animation: sucessoIn 0.25s ease;
+}
+
+@keyframes sucessoIn {
+  from { opacity: 0; transform: scale(0.92) translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.sucesso-icone {
+  font-size: 52px;
+  margin-bottom: 1rem;
+  display: block;
+  animation: bounce 0.5s ease 0.1s both;
+}
+
+@keyframes bounce {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.sucesso-titulo {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.sucesso-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Barra de progresso de redirecionamento */
+.sucesso-barra-wrap {
+  width: 100%;
+  height: 4px;
+  background: var(--border2);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.sucesso-barra {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width linear;
+}

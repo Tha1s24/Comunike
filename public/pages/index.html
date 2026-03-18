@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunike — Encontre sua tribo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/index.css">
+</head>
+<body class="page-index">
+
+  <!-- FUNDO DECORATIVO -->
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="blob blob-c"></div>
+  </div>
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <a href="index.html" class="nav-brand" aria-label="Comunike — página inicial">
+      <span class="brand-icon" aria-hidden="true">◈</span>
+      <span class="brand-name">Comunike</span>
+    </a>
+    <div class="nav-actions">
+      <button class="btn-theme" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">◐</button>
+      <a href="login.html" class="btn-ghost">Entrar</a>
+      <a href="cadastro.html" class="btn-accent">Criar conta</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-titulo">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        Chat em tempo real
+      </div>
+      <h1 class="hero-title" id="hero-titulo">
+        Encontre sua <em>tribo.</em><br>
+        Compartilhe sua paixão.
+      </h1>
+      <p class="hero-desc">
+        Comunike é a plataforma de chat por hobbies. Entre em salas temáticas,
+        converse em tempo real e conecte-se com quem compartilha os mesmos interesses.
+      </p>
+      <div class="hero-btns">
+        <a href="cadastro.html" class="btn-hero-primary">Começar agora →</a>
+        <a href="login.html"    class="btn-hero-ghost">Já tenho conta</a>
+      </div>
+    </div>
+
+    <!-- PREVIEW VISUAL DO CHAT -->
+    <div class="hero-preview" role="img" aria-label="Prévia da interface do chat Comunike">
+      <div class="preview-bar" aria-hidden="true">
+        <span class="preview-dot dot-red"></span>
+        <span class="preview-dot dot-yellow"></span>
+        <span class="preview-dot dot-green"></span>
+        <span class="preview-bar-title">◈ Comunike — Sala: Fotografia</span>
+      </div>
+      <div class="preview-msgs" aria-hidden="true">
+        <div class="preview-msg">
+          <span class="preview-avatar">🦊</span>
+          <div class="preview-bubble-wrap">
+            <span class="preview-name">rafaella</span>
+            <div class="preview-bubble">Alguém usa filme analógico ainda? 📷</div>
+          </div>
+        </div>
+        <div class="preview-msg">
+          <span class="preview-avatar">🐼</span>
+          <div class="preview-bubble-wrap">
+            <span class="preview-name">marcos_dev</span>
+            <div class="preview-bubble">Sim! Adoro Kodak Portra 400. As cores são incríveis 🎞️</div>
+          </div>
+        </div>
+        <div class="preview-msg">
+          <span class="preview-avatar">🦁</span>
+          <div class="preview-bubble-wrap">
+            <span class="preview-name">carol.foto</span>
+            <div class="preview-bubble">Recém comprei uma Olympus OM-1, estou apaixonada ❤️</div>
+          </div>
+        </div>
+      </div>
+      <div class="preview-typing" aria-hidden="true">✍️ rafaella está digitando...</div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- HOBBIES -->
+  <section class="section section-hobbies" aria-labelledby="hobbies-titulo">
+    <div class="section-inner">
+      <p class="section-label" aria-hidden="true">Categorias</p>
+      <h2 class="section-title" id="hobbies-titulo">Uma sala para cada paixão</h2>
+      <p class="section-desc">Explore dezenas de salas organizadas por categoria.</p>
+      <ul class="hobbies-grid" role="list" aria-label="Categorias de hobbies disponíveis">
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">📷</span><span class="hobby-name">Fotografia</span><span class="hobby-cat">Arte</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">🎮</span><span class="hobby-name">Games</span><span class="hobby-cat">Tecnologia</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">🍳</span><span class="hobby-name">Culinária</span><span class="hobby-cat">Gastronomia</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">📚</span><span class="hobby-name">Leitura</span><span class="hobby-cat">Conhecimento</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">🎵</span><span class="hobby-name">Música</span><span class="hobby-cat">Arte</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">🏃</span><span class="hobby-name">Corrida</span><span class="hobby-cat">Esportes</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">✏️</span><span class="hobby-name">Desenho</span><span class="hobby-cat">Arte</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">♟️</span><span class="hobby-name">Xadrez</span><span class="hobby-cat">Colecionismo</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">🌱</span><span class="hobby-name">Jardinagem</span><span class="hobby-cat">Gastronomia</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">🚴</span><span class="hobby-name">Ciclismo</span><span class="hobby-cat">Esportes</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">🎲</span><span class="hobby-name">Board Games</span><span class="hobby-cat">Colecionismo</span></li>
+        <li class="hobby-card" role="listitem"><span class="hobby-icon" aria-hidden="true">🌍</span><span class="hobby-name">Viagens</span><span class="hobby-cat">Conhecimento</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- FEATURES -->
+  <section class="section section-features" aria-labelledby="features-titulo">
+    <div class="section-inner">
+      <p class="section-label" aria-hidden="true">Recursos</p>
+      <h2 class="section-title" id="features-titulo">Tudo que você precisa para conectar</h2>
+      <p class="section-desc">Criado com foco em experiência real, acessibilidade e comunicação fluida.</p>
+      <ul class="features-grid" role="list">
+        <li class="feature-card" role="listitem">
+          <span class="feature-icon" aria-hidden="true">⚡</span>
+          <h3 class="feature-title">Tempo real</h3>
+          <p class="feature-desc">Mensagens entregues instantaneamente via WebSocket. Sem recarregar a página.</p>
+        </li>
+        <li class="feature-card" role="listitem">
+          <span class="feature-icon" aria-hidden="true">🏠</span>
+          <h3 class="feature-title">Salas temáticas</h3>
+          <p class="feature-desc">Crie e entre em salas por hobby. Cada comunidade tem seu próprio espaço.</p>
+        </li>
+        <li class="feature-card" role="listitem">
+          <span class="feature-icon" aria-hidden="true">✍️</span>
+          <h3 class="feature-title">Indicador de digitação</h3>
+          <p class="feature-desc">Veja quando alguém está digitando, como nos melhores apps de mensagens.</p>
+        </li>
+        <li class="feature-card" role="listitem">
+          <span class="feature-icon" aria-hidden="true">🌙</span>
+          <h3 class="feature-title">Dark mode</h3>
+          <p class="feature-desc">Tema adaptado ao seu sistema. Troque quando quiser com um clique.</p>
+        </li>
+        <li class="feature-card" role="listitem">
+          <span class="feature-icon" aria-hidden="true">♿</span>
+          <h3 class="feature-title">Acessível</h3>
+          <p class="feature-desc">Construído com ARIA, foco visível e suporte a leitores de tela.</p>
+        </li>
+        <li class="feature-card" role="listitem">
+          <span class="feature-icon" aria-hidden="true">🛡️</span>
+          <h3 class="feature-title">Moderação</h3>
+          <p class="feature-desc">Criadores podem remover mensagens e usuários para manter o ambiente saudável.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section-cta" aria-labelledby="cta-titulo">
+    <h2 class="cta-title" id="cta-titulo">Pronto para encontrar sua tribo?</h2>
+    <p class="cta-desc">Crie sua conta grátis em segundos e entre na conversa agora mesmo.</p>
+    <a href="cadastro.html" class="btn-hero-primary" aria-label="Criar conta gratuita no Comunike">
+      Criar conta grátis →
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <span class="footer-brand"><span aria-hidden="true">◈</span> Comunike</span>
+    <p class="footer-copy">Feito com ❤️ e JavaScript puro</p>
+  </footer>
+
+  <!-- TOAST -->
+  <div id="toast-container" role="region" aria-label="Notificações" aria-live="assertive"></div>
+
+  <script src="../js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunike — Salas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/salas.css">
+</head>
+<body class="page-salas">
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="nav-brand" aria-label="Comunike — página inicial">
+        <span class="brand-icon" aria-hidden="true">◈</span>
+        <span class="brand-name">Comunike</span>
+      </a>
+      <div class="header-usuario" id="header-usuario" aria-live="polite"></div>
+      <div class="header-actions">
+        <button class="btn-theme" id="btn-theme" type="button" aria-label="Alternar tema">◐</button>
+        <button class="btn-accent" id="btn-nova-sala" type="button" aria-haspopup="dialog">+ Nova sala</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="salas-main" role="main">
+
+    <section class="salas-topo" aria-label="Busca e filtros">
+      <form class="search-form" role="search" onsubmit="return false;">
+        <label for="inp-busca" class="sr-only">Buscar salas</label>
+        <input
+          type="search"
+          id="inp-busca"
+          name="busca"
+          class="search-input"
+          placeholder="🔍 Buscar salas..."
+          aria-label="Buscar salas por nome ou descrição"
+        >
+      </form>
+      <nav class="filtros-cats" aria-label="Filtrar por categoria">
+        <button class="cat-btn cat-btn--ativo" type="button" data-cat="todas"             aria-pressed="true">Todas</button>
+        <button class="cat-btn"                type="button" data-cat="Esportes"           aria-pressed="false">Esportes</button>
+        <button class="cat-btn"                type="button" data-cat="Tecnologia e games" aria-pressed="false">Games</button>
+        <button class="cat-btn"                type="button" data-cat="Arte e criatividade" aria-pressed="false">Arte</button>
+        <button class="cat-btn"                type="button" data-cat="Gastronomia"        aria-pressed="false">Gastronomia</button>
+        <button class="cat-btn"                type="button" data-cat="Conhecimento"       aria-pressed="false">Conhecimento</button>
+        <button class="cat-btn"                type="button" data-cat="Colecionismo"       aria-pressed="false">Colecionismo</button>
+      </nav>
+    </section>
+
+    <section aria-label="Lista de salas">
+      <ul class="salas-grid" id="salas-grid" role="list" aria-live="polite"></ul>
+      <div class="salas-vazio salas-vazio--oculto" id="salas-vazio" role="status">
+        Nenhuma sala encontrada. Que tal criar uma?
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MINI MODAL: NOVA / EDITAR SALA -->
+  <div class="mini-modal-overlay" id="mini-modal-sala" role="dialog" aria-modal="true" aria-labelledby="mini-modal-titulo" hidden>
+    <div class="mini-modal">
+
+      <div class="mini-modal-header">
+        <h2 class="mini-modal-titulo" id="mini-modal-titulo">Nova sala</h2>
+        <button class="mini-modal-fechar" id="mini-modal-fechar" type="button" aria-label="Fechar">✕</button>
+      </div>
+
+      <div id="form-sala">
+
+        <div class="form-group">
+          <label for="sala-nome" class="form-label">Nome da sala</label>
+          <input
+            type="text"
+            id="sala-nome"
+            name="nome"
+            class="form-input"
+            maxlength="60"
+            placeholder="Ex: Fotografia analógica"
+            aria-required="true"
+          >
+          <span id="erro-sala-nome" class="form-error" role="alert" aria-live="polite"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="sala-desc" class="form-label">
+            Descrição <span class="form-label-opt">(opcional)</span>
+          </label>
+          <input
+            type="text"
+            id="sala-desc"
+            name="descricao"
+            class="form-input"
+            maxlength="120"
+            placeholder="Sobre o que é esta sala?"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="sala-cat" class="form-label">Categoria</label>
+          <div class="select-wrap">
+            <select id="sala-cat" name="categoria" class="form-select" aria-required="true">
+              <option value="">Selecione uma categoria</option>
+              <option value="Esportes">Esportes e movimento</option>
+              <option value="Tecnologia e games">Tecnologia e games</option>
+              <option value="Arte e criatividade">Arte e criatividade</option>
+              <option value="Gastronomia">Gastronomia e bem-estar</option>
+              <option value="Conhecimento">Conhecimento e cultura</option>
+              <option value="Colecionismo">Colecionismo e hobbies manuais</option>
+            </select>
+          </div>
+          <span id="erro-sala-cat" class="form-error" role="alert" aria-live="polite"></span>
+        </div>
+
+        <div class="mini-modal-acoes">
+          <button type="button" class="btn-ghost" id="btn-cancelar-modal">Cancelar</button>
+          <button type="button" class="btn-accent" id="btn-salvar-sala">Criar sala</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast-container" role="region" aria-label="Notificações" aria-live="assertive"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/salas.js"></script>
+</body>
+</html>
