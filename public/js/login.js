@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Se já tem sessão ativa, redireciona direto
   if (lerSessao()) {
-    window.location.href = "salas.html";
+    window.location.href = "/salas";
     return;
   }
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     salvarSessao({ apelido: apelido, avatar: avatar });
-    window.location.href = "salas.html";
+    window.location.href = "/salas";
   });
 
   // Permite entrar com Enter nos campos

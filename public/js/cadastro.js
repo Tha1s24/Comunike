@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Se já tem sessão, redireciona
   if (lerSessao()) {
-    window.location.href = "salas.html";
+    window.location.href = "/salas";
     return;
   }
 
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (progresso < 1) {
         requestAnimationFrame(animar);
       } else {
-        window.location.href = "salas.html";
+        window.location.href = "/salas";
       }
     }
 

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---- Garante sessão ativa ----
   var usuario = lerSessao();
   if (!usuario) {
-    window.location.href = "login.html";
+    window.location.href = "/login";
     return;
   }
 
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
     grid.querySelectorAll(".sala-card").forEach(function (card) {
       card.addEventListener("click", function (e) {
         if (e.target.closest(".sala-card-acoes")) return;
-        window.location.href = "chat.html?sala=" + card.dataset.id;
+        window.location.href = "/chat?sala=" + card.dataset.id;
       });
       card.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") {

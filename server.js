@@ -25,9 +25,11 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // ---- Rotas de páginas ----
-app.get("/",        (req, res) => res.sendFile(path.join(__dirname, "public", "pages", "login.html")));
-app.get("/salas",   (req, res) => res.sendFile(path.join(__dirname, "public", "pages", "salas.html")));
-app.get("/chat",    (req, res) => res.sendFile(path.join(__dirname, "public", "pages", "chat.html")));
+app.get("/",           (req, res) => res.sendFile(path.join(__dirname, "public", "pages", "index.html")));
+app.get("/login",      (req, res) => res.sendFile(path.join(__dirname, "public", "pages", "login.html")));
+app.get("/cadastro",   (req, res) => res.sendFile(path.join(__dirname, "public", "pages", "cadastro.html")));
+app.get("/salas",      (req, res) => res.sendFile(path.join(__dirname, "public", "pages", "salas.html")));
+app.get("/chat",       (req, res) => res.sendFile(path.join(__dirname, "public", "pages", "chat.html")));
 
 // ---- API REST: Salas ----
 app.get("/api/salas", (req, res) => {
