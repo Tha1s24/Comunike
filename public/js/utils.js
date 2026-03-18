@@ -8,19 +8,19 @@
 var SESSAO_KEY = "comunike_usuario";
 
 function salvarSessao(dados) {
-  sessionStorage.setItem(SESSAO_KEY, JSON.stringify(dados));
+  localStorage.setItem(SESSAO_KEY, JSON.stringify(dados));
 }
 
 function lerSessao() {
   try {
-    return JSON.parse(sessionStorage.getItem(SESSAO_KEY));
+    return JSON.parse(localStorage.getItem(SESSAO_KEY));
   } catch (e) {
     return null;
   }
 }
 
 function limparSessao() {
-  sessionStorage.removeItem(SESSAO_KEY);
+  localStorage.removeItem(SESSAO_KEY);
 }
 
 // ---- TOAST DE NOTIFICAÇÃO ----
