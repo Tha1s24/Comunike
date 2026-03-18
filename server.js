@@ -9,15 +9,8 @@ const express       = require("express");
 const http          = require("http");
 const { Server }    = require("socket.io");
 const path          = require("path");
-const fs            = require("fs");
 const db            = require("./src/db");
 const socketHandler = require("./src/socketHandler");
-
-// Garante que a pasta data/ existe no servidor
-const dataDir = path.join(__dirname, "data");
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
 
 const app    = express();
 const server = http.createServer(app);

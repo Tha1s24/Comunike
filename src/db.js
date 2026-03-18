@@ -6,8 +6,15 @@
 const fs   = require("fs");
 const path = require("path");
 
-const SALAS_PATH     = path.join(__dirname, "../data/salas.json");
-const MSGS_PATH      = path.join(__dirname, "../data/mensagens.json");
+// Garante que a pasta data/ existe ANTES de qualquer leitura ou escrita
+// Isso resolve o erro ENOENT no Render e Railway
+const DATA_DIR   = path.join(__dirname, "../data");
+const SALAS_PATH = path.join(DATA_DIR, "salas.json");
+const MSGS_PATH  = path.join(DATA_DIR, "mensagens.json");
+
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
 
 const MAX_MENSAGENS_POR_SALA = 100;
 
