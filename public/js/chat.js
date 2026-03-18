@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ============================================
   function renderMsg(msg) {
     var minha   = msg.apelido === usuario.apelido;
-    var podeDel = eCriador && !minha;
+    var podeDel = minha || eCriador; // dono da msg ou criador da sala
 
     var item = document.createElement("div");
     item.className     = "msg-item";
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
         conteudo +
       "</div>" +
       (podeDel
-        ? '<div class="msg-acoes"><button class="btn-del-msg" type="button" data-id="' + msg.id + '" aria-label="Remover">✕</button></div>'
+        ? '<div class="msg-acoes"><button class="btn-del-msg" type="button" data-id="' + msg.id + '" aria-label="' + (minha ? 'Apagar minha mensagem' : 'Remover mensagem') + '" title="' + (minha ? 'Apagar' : 'Remover') + '">🗑</button></div>'
         : "");
 
     // Lightbox imagem
@@ -190,7 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (podeDel) {
       item.querySelector(".btn-del-msg").addEventListener("click", function (e) {
         e.stopPropagation();
-        if (!confirm("Remover esta mensagem?")) return;
+        var pergunta = minha
+          ? "Apagar sua mensagem? Esta ação não pode ser desfeita."
+          : "Remover a mensagem de " + msg.apelido + "?";
+        if (!confirm(pergunta)) return;
         removerMsg(msg.id);
       });
     }

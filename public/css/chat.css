@@ -124,12 +124,25 @@
 .msg-acoes { opacity: 0; transition: opacity var(--transition); margin-left: auto; flex-shrink: 0; }
 .msg-item:hover .msg-acoes { opacity: 1; }
 .btn-del-msg {
-  background: transparent; border: 1px solid var(--border2);
-  cursor: pointer; color: var(--text3);
-  font-size: 11px; padding: 3px 7px; border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  color: var(--text3);
+  font-size: 14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all var(--transition);
 }
-.btn-del-msg:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.btn-del-msg:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  transform: scale(1.05);
+}
 
 /* Imagem na mensagem */
 .msg-imagem-wrap { margin-top: 4px; }

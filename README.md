@@ -14,7 +14,7 @@
 
 [![Deploy](https://img.shields.io/badge/Deploy-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)](https://seu-usuario.up.railway.app)
 [![Status](https://img.shields.io/badge/Status-Online-e84b3a?style=for-the-badge)](https://seu-usuario.up.railway.app)
-[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://github.com/seu-usuario/comunike)
+[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://github.com/Tha1s24/Comunike.git)
 [![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org)
 
 </div>
@@ -155,7 +155,7 @@ comunike/
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seu-usuario/comunike.git
+git clone https://github.com/Tha1s24/Comunike.git
 
 # 2. Entre na pasta do projeto
 cd comunike
@@ -318,11 +318,11 @@ railway up
     <td align="center">
       <b>Seu Nome Aqui</b>
       <br><br>
-      <a href="https://github.com/seu-usuario">
+      <a href="https://github.com/Tha1s24/Comunike.git">
         <img src="https://img.shields.io/badge/GitHub-seu--usuario-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
       </a>
       <br><br>
-      <a href="https://linkedin.com/in/seu-usuario">
+      <a href="www.linkedin.com/in/thais-vitória-ferraz-rangel">
         <img src="https://img.shields.io/badge/LinkedIn-seu--usuario-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
       </a>
     </td>
