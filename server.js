@@ -26,7 +26,7 @@ const io     = new Server(server, {
   cors: { origin: "*" }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 // ---- Middlewares ----
 app.use(express.json());
