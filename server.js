@@ -5,14 +5,13 @@
 
 require("dotenv").config();
 
-const express    = require("express");
-const http       = require("http");
-const { Server } = require("socket.io");
-const path       = require("path");
-const db         = require("./src/db");
+const express       = require("express");
+const http          = require("http");
+const { Server }    = require("socket.io");
+const path          = require("path");
+const fs            = require("fs");
+const db            = require("./src/db");
 const socketHandler = require("./src/socketHandler");
-const fs = require("fs");
-const path = require("path");
 
 // Garante que a pasta data/ existe no servidor
 const dataDir = path.join(__dirname, "data");
