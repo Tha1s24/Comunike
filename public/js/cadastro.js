@@ -125,15 +125,16 @@ document.addEventListener("DOMContentLoaded", function () {
       var dados = {
         apelido:  apelido,
         email:    email,
+        senha:    senha,
         avatar:   avatarSelecionado,
         hobbies:  hobbysSelecionados.slice()
       };
 
-      // Persiste cadastro para login futuro
+      // Persiste cadastro para login futuro (inclui senha para validação)
       localStorage.setItem("comunike_cadastro_" + apelido, JSON.stringify(dados));
 
-      // Salva sessão ativa
-      salvarSessao(dados);
+      // Salva sessão ativa (sem a senha por segurança)
+      salvarSessao({ apelido: apelido, avatar: avatarSelecionado, hobbies: hobbysSelecionados.slice() });
 
       // Mostra modal de sucesso
       abrirModalSucesso(apelido);

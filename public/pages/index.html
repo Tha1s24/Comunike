@@ -175,5 +175,23 @@
   <div id="toast-container" role="region" aria-label="Notificações" aria-live="assertive"></div>
 
   <script src="/js/theme.js"></script>
+  <script>
+    // Na landing page nunca redireciona automaticamente.
+    // Limpa sessões corrompidas ou de testes antigos.
+    (function () {
+      try {
+        var raw = localStorage.getItem("comunike_usuario");
+        if (raw) {
+          var d = JSON.parse(raw);
+          // Sessão sem apelido válido é inválida — remove
+          if (!d || typeof d.apelido !== "string" || d.apelido.length < 1) {
+            localStorage.removeItem("comunike_usuario");
+          }
+        }
+      } catch (e) {
+        localStorage.removeItem("comunike_usuario");
+      }
+    })();
+  </script>
 </body>
 </html>

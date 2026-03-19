@@ -4,7 +4,8 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // Só redireciona se tiver sessão válida E não estiver já em /salas
+  // Se já tem sessão válida, vai para salas
+  // (usuário clicou em "Entrar" mas já estava logado)
   var sessao = lerSessao();
   if (sessao) {
     irPara("/salas");
@@ -19,31 +20,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function tentar() {
     var apelido = inputApelido.value.trim().replace(/\s+/g, "").slice(0, 24);
-    var senha   = inputSenha ? inputSenha.value : "ok";
+    var senha   = inputSenha ? inputSenha.value : "";
 
     erroApelido.textContent = "";
     if (erroSenha) erroSenha.textContent = "";
 
+    // Valida apelido
     if (!apelido || apelido.length < 2) {
       erroApelido.textContent = "Apelido precisa ter pelo menos 2 caracteres.";
       inputApelido.focus();
       return;
     }
 
-    if (inputSenha && !senha) {
+    // Valida senha obrigatória
+    if (!senha || senha.trim().length === 0) {
       if (erroSenha) erroSenha.textContent = "Informe sua senha.";
+      if (inputSenha) inputSenha.focus();
       return;
     }
 
-    // Recupera avatar do cadastro anterior se existir
+    // Verifica se o cadastro existe e se a senha confere
+    var raw    = localStorage.getItem("comunike_cadastro_" + apelido);
     var avatar = "🐱";
-    try {
-      var raw = localStorage.getItem("comunike_cadastro_" + apelido);
-      if (raw) {
-        var dados = JSON.parse(raw);
-        avatar = dados.avatar || "🐱";
-      }
-    } catch (e) {}
+
+    if (raw) {
+      try {
+        var cadastro = JSON.parse(raw);
+        // Verifica senha
+        if (cadastro.senha && cadastro.senha !== senha) {
+          if (erroSenha) erroSenha.textContent = "Senha incorreta.";
+          if (inputSenha) inputSenha.focus();
+          return;
+        }
+        avatar = cadastro.avatar || "🐱";
+      } catch (e) {}
+    } else {
+      // Cadastro não encontrado — orienta o usuário
+      erroApelido.textContent = "Apelido não cadastrado. Crie uma conta primeiro.";
+      inputApelido.focus();
+      return;
+    }
 
     salvarSessao({ apelido: apelido, avatar: avatar });
     window.location.href = "/salas";
@@ -52,13 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
   btnEntrar.addEventListener("click", tentar);
 
   inputApelido.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") tentar();
+    if (e.key === "Enter") { e.preventDefault(); tentar(); }
     erroApelido.textContent = "";
   });
 
   if (inputSenha) {
     inputSenha.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") tentar();
+      if (e.key === "Enter") { e.preventDefault(); tentar(); }
     });
     inputSenha.addEventListener("input", function () {
       if (erroSenha) erroSenha.textContent = "";
