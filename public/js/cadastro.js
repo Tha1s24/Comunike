@@ -1,20 +1,19 @@
 // ============================================
 // COMUNIKE — js/cadastro.js
-// Lógica da tela de cadastro
 // ============================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // Se já tem sessão, redireciona
-  if (lerSessao()) {
-    window.location.href = "/salas";
+  // Só redireciona se tiver sessão válida E não estiver já em /salas
+  var sessao = lerSessao();
+  if (sessao) {
+    irPara("/salas");
     return;
   }
 
   var avatarSelecionado  = "🐱";
   var hobbysSelecionados = [];
 
-  // ---- Referências dos elementos ----
   var inputApelido = document.getElementById("inp-apelido");
   var inputEmail   = document.getElementById("inp-email");
   var inputSenha   = document.getElementById("inp-senha");
@@ -38,16 +37,11 @@ document.addEventListener("DOMContentLoaded", function () {
   var coresForca  = ["#e84b3a", "#e6a817", "#2d9b6f", "#28a86e"];
   var labelsForca = ["", "Fraca", "Média", "Forte"];
 
-  // ============================================
-  // SELEÇÃO DE AVATAR
-  // Todos os botões são type="button" no HTML,
-  // garantindo que não disparam o submit
-  // ============================================
-  var avatarBtns = document.querySelectorAll(".avatar-btn");
-  avatarBtns.forEach(function (btn) {
+  // ---- Avatar ----
+  document.querySelectorAll(".avatar-btn").forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
-      avatarBtns.forEach(function (b) {
+      document.querySelectorAll(".avatar-btn").forEach(function (b) {
         b.classList.remove("active");
         b.setAttribute("aria-pressed", "false");
       });
@@ -57,16 +51,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // ============================================
-  // SELEÇÃO DE HOBBIES (máximo 3)
-  // ============================================
-  var hobbyBtns = document.querySelectorAll(".hobby-btn");
-  hobbyBtns.forEach(function (btn) {
+  // ---- Hobbies ----
+  document.querySelectorAll(".hobby-btn").forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
       var hobby = btn.dataset.hobby;
       var idx   = hobbysSelecionados.indexOf(hobby);
-
       if (idx !== -1) {
         hobbysSelecionados.splice(idx, 1);
         btn.classList.remove("active");
@@ -80,108 +70,91 @@ document.addEventListener("DOMContentLoaded", function () {
         btn.classList.add("active");
         btn.setAttribute("aria-pressed", "true");
       }
-
-      erroHobbies.textContent = "";
+      if (erroHobbies) erroHobbies.textContent = "";
     });
   });
 
-  // ============================================
-  // INDICADOR DE FORÇA DA SENHA
-  // ============================================
-  inputSenha.addEventListener("input", function () {
-    var v     = inputSenha.value;
-    var nivel = 0;
-
-    if (v.length >= 6)                        nivel++;
-    if (v.length >= 10)                       nivel++;
-    if (/[A-Z]/.test(v) && /[0-9]/.test(v))  nivel++;
-    if (/[^A-Za-z0-9]/.test(v))              nivel++;
-
-    forcaBars.forEach(function (bar, i) {
-      bar.style.background = (i < nivel) ? coresForca[nivel - 1] : "var(--border2)";
+  // ---- Força da senha ----
+  if (inputSenha) {
+    inputSenha.addEventListener("input", function () {
+      var v     = inputSenha.value;
+      var nivel = 0;
+      if (v.length >= 6)                        nivel++;
+      if (v.length >= 10)                       nivel++;
+      if (/[A-Z]/.test(v) && /[0-9]/.test(v))  nivel++;
+      if (/[^A-Za-z0-9]/.test(v))              nivel++;
+      forcaBars.forEach(function (bar, i) {
+        bar.style.background = (i < nivel) ? coresForca[nivel - 1] : "var(--border2)";
+      });
+      if (forcaLabel) forcaLabel.textContent = nivel > 0 ? labelsForca[nivel] : "";
+      if (erroSenha) erroSenha.textContent = "";
     });
+  }
 
-    forcaLabel.textContent  = nivel > 0 ? labelsForca[nivel] : "";
-    erroSenha.textContent   = "";
-  });
+  if (inputApelido) inputApelido.addEventListener("input", function () { if (erroApelido) erroApelido.textContent = ""; });
+  if (inputEmail)   inputEmail.addEventListener("input",   function () { if (erroEmail)   erroEmail.textContent   = ""; });
 
-  // ============================================
-  // LIMPAR ERROS AO DIGITAR
-  // ============================================
-  inputApelido.addEventListener("input", function () { erroApelido.textContent = ""; });
-  inputEmail.addEventListener("input",   function () { erroEmail.textContent   = ""; });
+  // ---- Submissão ----
+  if (btnCadastrar) {
+    btnCadastrar.addEventListener("click", function () {
+      var apelido = inputApelido ? inputApelido.value.trim().replace(/\s+/g, "") : "";
+      var email   = inputEmail   ? inputEmail.value.trim()   : "";
+      var senha   = inputSenha   ? inputSenha.value          : "";
+      var valido  = true;
 
-  // ============================================
-  // VALIDAÇÃO E SUBMISSÃO
-  // Usa type="button" no botão — sem form submit
-  // ============================================
-  btnCadastrar.addEventListener("click", function () {
-    var apelido = inputApelido.value.trim().replace(/\s+/g, "");
-    var email   = inputEmail.value.trim();
-    var senha   = inputSenha.value;
-    var valido  = true;
+      if (erroApelido) erroApelido.textContent = "";
+      if (erroEmail)   erroEmail.textContent   = "";
+      if (erroSenha)   erroSenha.textContent   = "";
+      if (erroHobbies) erroHobbies.textContent = "";
 
-    // Limpa todos os erros
-    erroApelido.textContent = "";
-    erroEmail.textContent   = "";
-    erroSenha.textContent   = "";
-    erroHobbies.textContent = "";
+      if (!apelido || apelido.length < 2) {
+        if (erroApelido) erroApelido.textContent = "Apelido precisa ter pelo menos 2 caracteres.";
+        if (inputApelido) inputApelido.focus();
+        valido = false;
+      }
+      if (!email || !email.includes("@") || !email.includes(".")) {
+        if (erroEmail) erroEmail.textContent = "Informe um e-mail válido.";
+        valido = false;
+      }
+      if (!senha || senha.length < 6) {
+        if (erroSenha) erroSenha.textContent = "Senha precisa ter pelo menos 6 caracteres.";
+        valido = false;
+      }
+      if (!valido) return;
 
-    // Valida apelido
-    if (!apelido || apelido.length < 2) {
-      erroApelido.textContent = "Apelido precisa ter pelo menos 2 caracteres.";
-      inputApelido.focus();
-      valido = false;
-    }
+      var dados = {
+        apelido:  apelido,
+        email:    email,
+        avatar:   avatarSelecionado,
+        hobbies:  hobbysSelecionados.slice()
+      };
 
-    // Valida e-mail
-    if (!email || !email.includes("@") || !email.includes(".")) {
-      erroEmail.textContent = "Informe um e-mail válido.";
-      valido = false;
-    }
+      // Persiste cadastro para login futuro
+      localStorage.setItem("comunike_cadastro_" + apelido, JSON.stringify(dados));
 
-    // Valida senha
-    if (!senha || senha.length < 6) {
-      erroSenha.textContent = "Senha precisa ter pelo menos 6 caracteres.";
-      valido = false;
-    }
+      // Salva sessão ativa
+      salvarSessao(dados);
 
-    if (!valido) return;
+      // Mostra modal de sucesso
+      abrirModalSucesso(apelido);
+    });
+  }
 
-    // Monta dados da sessão
-    var dados = {
-      apelido:  apelido,
-      email:    email,
-      avatar:   avatarSelecionado,
-      hobbies:  hobbysSelecionados.slice()
-    };
-
-    // Persiste no localStorage para login futuro
-    localStorage.setItem("comunike_cadastro_" + apelido, JSON.stringify(dados));
-
-    // Salva sessão ativa
-    salvarSessao(dados);
-
-    // ---- Exibe mini modal de sucesso ----
-    abrirModalSucesso(apelido);
-  });
-
-  // ============================================
-  // MINI MODAL DE SUCESSO COM BARRA DE PROGRESSO
-  // ============================================
+  // ---- Modal de sucesso ----
   function abrirModalSucesso(apelido) {
-    sucessoDesc.textContent = "Bem-vindo(a), " + apelido + "! Redirecionando para as salas...";
-    modalSucesso.hidden     = false;
-    document.body.style.overflow = "hidden";
+    if (sucessoDesc)  sucessoDesc.textContent  = "Bem-vindo(a), " + apelido + "! Redirecionando...";
+    if (modalSucesso) {
+      modalSucesso.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
 
-    // Anima a barra de progresso em 2.5s
-    var duracao  = 2500;
-    var inicio   = null;
+    var duracao = 2500;
+    var inicio  = null;
 
     function animar(timestamp) {
       if (!inicio) inicio = timestamp;
       var progresso = Math.min((timestamp - inicio) / duracao, 1);
-      sucessoBarra.style.width = (progresso * 100).toFixed(1) + "%";
+      if (sucessoBarra) sucessoBarra.style.width = (progresso * 100).toFixed(1) + "%";
       if (progresso < 1) {
         requestAnimationFrame(animar);
       } else {

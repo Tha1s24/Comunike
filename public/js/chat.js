@@ -14,12 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ---- Sessão ----
   var usuario = lerSessao();
-  if (!usuario) { window.location.href = "/login"; return; }
+  if (!usuario) { irPara("/login"); return; }
 
   // ---- Parâmetro da sala ----
   var params = new URLSearchParams(window.location.search);
   var salaId = params.get("sala");
-  if (!salaId) { window.location.href = "/salas"; return; }
+  if (!salaId) { irPara("/salas"); return; }
 
   // ---- localStorage ----
   var SALAS_KEY = "comunike_salas";
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var salaInfo = salas.find(function (s) { return s.id === salaId; });
   if (!salaInfo) {
     showToast("Sala não encontrada.", "erro");
-    setTimeout(function () { window.location.href = "/salas"; }, 1500);
+    setTimeout(function () { irPara("/salas"); }, 1500);
     return;
   }
 

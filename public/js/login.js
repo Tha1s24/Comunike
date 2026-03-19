@@ -1,13 +1,13 @@
 // ============================================
 // COMUNIKE — js/login.js
-// Lógica da tela de login
 // ============================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // Se já tem sessão ativa, redireciona direto
-  if (lerSessao()) {
-    window.location.href = "/salas";
+  // Só redireciona se tiver sessão válida E não estiver já em /salas
+  var sessao = lerSessao();
+  if (sessao) {
+    irPara("/salas");
     return;
   }
 
@@ -17,56 +17,56 @@ document.addEventListener("DOMContentLoaded", function () {
   var erroSenha    = document.getElementById("erro-senha-login");
   var btnEntrar    = document.getElementById("btn-entrar");
 
-  // ---- Submissão via botão type="button" ----
-  btnEntrar.addEventListener("click", function () {
+  function tentar() {
     var apelido = inputApelido.value.trim().replace(/\s+/g, "").slice(0, 24);
     var senha   = inputSenha ? inputSenha.value : "ok";
 
     erroApelido.textContent = "";
     if (erroSenha) erroSenha.textContent = "";
 
-    var valido = true;
-
     if (!apelido || apelido.length < 2) {
       erroApelido.textContent = "Apelido precisa ter pelo menos 2 caracteres.";
       inputApelido.focus();
-      valido = false;
+      return;
     }
 
     if (inputSenha && !senha) {
-      erroSenha.textContent = "Informe sua senha.";
-      valido = false;
+      if (erroSenha) erroSenha.textContent = "Informe sua senha.";
+      return;
     }
 
-    if (!valido) return;
-
-    // Recupera avatar salvo no cadastro se existir, senão usa padrão
-    var sessaoExistente = localStorage.getItem("comunike_cadastro_" + apelido);
+    // Recupera avatar do cadastro anterior se existir
     var avatar = "🐱";
-    if (sessaoExistente) {
-      try {
-        var dados = JSON.parse(sessaoExistente);
+    try {
+      var raw = localStorage.getItem("comunike_cadastro_" + apelido);
+      if (raw) {
+        var dados = JSON.parse(raw);
         avatar = dados.avatar || "🐱";
-      } catch (e) {}
-    }
+      }
+    } catch (e) {}
 
     salvarSessao({ apelido: apelido, avatar: avatar });
     window.location.href = "/salas";
-  });
+  }
 
-  // Permite entrar com Enter nos campos
+  btnEntrar.addEventListener("click", tentar);
+
   inputApelido.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") btnEntrar.click();
+    if (e.key === "Enter") tentar();
     erroApelido.textContent = "";
   });
 
   if (inputSenha) {
     inputSenha.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") btnEntrar.click();
+      if (e.key === "Enter") tentar();
     });
     inputSenha.addEventListener("input", function () {
       if (erroSenha) erroSenha.textContent = "";
     });
   }
+
+  inputApelido.addEventListener("input", function () {
+    erroApelido.textContent = "";
+  });
 
 });

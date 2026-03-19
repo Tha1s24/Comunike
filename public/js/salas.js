@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---- Garante sessão ativa ----
   var usuario = lerSessao();
   if (!usuario) {
-    window.location.href = "/login";
+    irPara("/login");
     return;
   }
 
