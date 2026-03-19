@@ -4,12 +4,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // Só redireciona se tiver sessão válida E não estiver já em /salas
-  var sessao = lerSessao();
-  if (sessao) {
-    irPara("/salas");
-    return;
-  }
+  // Página de cadastro NUNCA redireciona automaticamente.
 
   var avatarSelecionado  = "🐱";
   var hobbysSelecionados = [];
@@ -33,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("forca-3"),
     document.getElementById("forca-4")
   ];
-
   var coresForca  = ["#e84b3a", "#e6a817", "#2d9b6f", "#28a86e"];
   var labelsForca = ["", "Fraca", "Média", "Forte"];
 
@@ -77,17 +71,17 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---- Força da senha ----
   if (inputSenha) {
     inputSenha.addEventListener("input", function () {
-      var v     = inputSenha.value;
+      var v = inputSenha.value;
       var nivel = 0;
-      if (v.length >= 6)                        nivel++;
-      if (v.length >= 10)                       nivel++;
-      if (/[A-Z]/.test(v) && /[0-9]/.test(v))  nivel++;
-      if (/[^A-Za-z0-9]/.test(v))              nivel++;
+      if (v.length >= 6)                       nivel++;
+      if (v.length >= 10)                      nivel++;
+      if (/[A-Z]/.test(v) && /[0-9]/.test(v)) nivel++;
+      if (/[^A-Za-z0-9]/.test(v))             nivel++;
       forcaBars.forEach(function (bar, i) {
         bar.style.background = (i < nivel) ? coresForca[nivel - 1] : "var(--border2)";
       });
       if (forcaLabel) forcaLabel.textContent = nivel > 0 ? labelsForca[nivel] : "";
-      if (erroSenha) erroSenha.textContent = "";
+      if (erroSenha)  erroSenha.textContent  = "";
     });
   }
 
@@ -122,19 +116,25 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       if (!valido) return;
 
-      var dados = {
-        apelido:  apelido,
-        email:    email,
-        senha:    senha,
-        avatar:   avatarSelecionado,
-        hobbies:  hobbysSelecionados.slice()
+      // Verifica se apelido já existe
+      if (localStorage.getItem("ck_cadastro_" + apelido)) {
+        if (erroApelido) erroApelido.textContent = "Este apelido já está em uso. Escolha outro.";
+        if (inputApelido) inputApelido.focus();
+        return;
+      }
+
+      // Salva cadastro completo com senha
+      var cadastro = {
+        apelido: apelido,
+        email:   email,
+        senha:   senha,
+        avatar:  avatarSelecionado,
+        hobbies: hobbysSelecionados.slice()
       };
+      localStorage.setItem("ck_cadastro_" + apelido, JSON.stringify(cadastro));
 
-      // Persiste cadastro para login futuro (inclui senha para validação)
-      localStorage.setItem("comunike_cadastro_" + apelido, JSON.stringify(dados));
-
-      // Salva sessão ativa (sem a senha por segurança)
-      salvarSessao({ apelido: apelido, avatar: avatarSelecionado, hobbies: hobbysSelecionados.slice() });
+      // Salva sessão ativa (sem a senha)
+      salvarSessao({ apelido: apelido, avatar: avatarSelecionado });
 
       // Mostra modal de sucesso
       abrirModalSucesso(apelido);
@@ -143,26 +143,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ---- Modal de sucesso ----
   function abrirModalSucesso(apelido) {
-    if (sucessoDesc)  sucessoDesc.textContent  = "Bem-vindo(a), " + apelido + "! Redirecionando...";
+    if (sucessoDesc)  sucessoDesc.textContent = "Bem-vindo(a), " + apelido + "! Redirecionando...";
     if (modalSucesso) {
       modalSucesso.hidden = false;
       document.body.style.overflow = "hidden";
     }
-
     var duracao = 2500;
     var inicio  = null;
-
-    function animar(timestamp) {
-      if (!inicio) inicio = timestamp;
-      var progresso = Math.min((timestamp - inicio) / duracao, 1);
-      if (sucessoBarra) sucessoBarra.style.width = (progresso * 100).toFixed(1) + "%";
-      if (progresso < 1) {
-        requestAnimationFrame(animar);
-      } else {
-        window.location.href = "/salas";
-      }
+    function animar(ts) {
+      if (!inicio) inicio = ts;
+      var p = Math.min((ts - inicio) / duracao, 1);
+      if (sucessoBarra) sucessoBarra.style.width = (p * 100).toFixed(1) + "%";
+      if (p < 1) { requestAnimationFrame(animar); }
+      else { window.location.href = "/salas"; }
     }
-
     requestAnimationFrame(animar);
   }
 
