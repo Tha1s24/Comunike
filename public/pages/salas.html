@@ -3,164 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comunike — Criar conta</title>
+  <title>Comunike — Salas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/global.css">
-  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/salas.css">
 </head>
-<body class="page-auth">
+<body class="page-salas">
 
-  <div class="bg-blobs" aria-hidden="true">
-    <div class="blob blob-a"></div>
-    <div class="blob blob-b"></div>
-    <div class="blob blob-c"></div>
-  </div>
-
-  <button class="btn-theme btn-theme-fixed" id="btn-theme" type="button" aria-label="Alternar tema">◐</button>
-
-  <main role="main">
-    <div class="auth-wrap">
-      <div class="auth-card">
-
-        <div class="auth-brand">
-          <span class="brand-icon" aria-hidden="true">◈</span>
-          <span class="brand-name">Comunike</span>
-        </div>
-
-        <h1 class="auth-titulo">Criar conta</h1>
-        <p class="auth-subtitulo">
-          Já tem conta? <a href="/login">Entrar agora</a>
-        </p>
-
-        <!-- =============================================
-             CAMPOS FORA DO FORM para evitar submit
-             acidental dos botões de avatar e hobbies
-             ============================================= -->
-
-        <!-- Apelido -->
-        <div class="form-group">
-          <label for="inp-apelido" class="form-label">Apelido</label>
-          <input
-            type="text"
-            id="inp-apelido"
-            name="apelido"
-            class="form-input"
-            placeholder="Como quer ser chamado?"
-            maxlength="24"
-            autocomplete="nickname"
-            aria-required="true"
-            aria-describedby="hint-apelido erro-apelido"
-          >
-          <span id="hint-apelido" class="form-hint">Máximo 24 caracteres, sem espaços.</span>
-          <span id="erro-apelido" class="form-error" role="alert" aria-live="polite"></span>
-        </div>
-
-        <!-- E-mail -->
-        <div class="form-group">
-          <label for="inp-email" class="form-label">E-mail</label>
-          <input
-            type="email"
-            id="inp-email"
-            name="email"
-            class="form-input"
-            placeholder="seu@email.com"
-            autocomplete="email"
-            aria-required="true"
-            aria-describedby="erro-email"
-          >
-          <span id="erro-email" class="form-error" role="alert" aria-live="polite"></span>
-        </div>
-
-        <!-- Senha com indicador de força -->
-        <div class="form-group">
-          <label for="inp-senha" class="form-label">Senha</label>
-          <input
-            type="password"
-            id="inp-senha"
-            name="senha"
-            class="form-input"
-            placeholder="Mínimo 6 caracteres"
-            autocomplete="new-password"
-            aria-required="true"
-            aria-describedby="forca-label erro-senha"
-          >
-          <div class="senha-forca" aria-hidden="true">
-            <div class="forca-bar" id="forca-1"></div>
-            <div class="forca-bar" id="forca-2"></div>
-            <div class="forca-bar" id="forca-3"></div>
-            <div class="forca-bar" id="forca-4"></div>
-          </div>
-          <span id="forca-label" class="forca-label" aria-live="polite"></span>
-          <span id="erro-senha" class="form-error" role="alert" aria-live="polite"></span>
-        </div>
-
-        <!-- Avatar — fora do form, botões type="button" explícito -->
-        <div class="form-group">
-          <span class="form-label" id="avatar-label">Seu avatar</span>
-          <div class="avatar-grid" role="radiogroup" aria-labelledby="avatar-label">
-            <button type="button" class="avatar-btn active" data-avatar="🐱" aria-label="Gato"      aria-pressed="true">🐱</button>
-            <button type="button" class="avatar-btn"        data-avatar="🐶" aria-label="Cachorro"  aria-pressed="false">🐶</button>
-            <button type="button" class="avatar-btn"        data-avatar="🦊" aria-label="Raposa"    aria-pressed="false">🦊</button>
-            <button type="button" class="avatar-btn"        data-avatar="🐧" aria-label="Pinguim"   aria-pressed="false">🐧</button>
-            <button type="button" class="avatar-btn"        data-avatar="🦁" aria-label="Leão"      aria-pressed="false">🦁</button>
-            <button type="button" class="avatar-btn"        data-avatar="🐸" aria-label="Sapo"      aria-pressed="false">🐸</button>
-            <button type="button" class="avatar-btn"        data-avatar="🐼" aria-label="Panda"     aria-pressed="false">🐼</button>
-            <button type="button" class="avatar-btn"        data-avatar="🦋" aria-label="Borboleta" aria-pressed="false">🦋</button>
-          </div>
-        </div>
-
-        <!-- Hobbies — fora do form, botões type="button" explícito -->
-        <div class="form-group">
-          <span class="form-label" id="hobbies-label">
-            Hobbies <span class="form-label-opt">(até 3)</span>
-          </span>
-          <div class="hobbies-grid" role="group" aria-labelledby="hobbies-label">
-            <button type="button" class="hobby-btn" data-hobby="Fotografia" aria-pressed="false"><span class="hobby-icon" aria-hidden="true">📷</span>Foto</button>
-            <button type="button" class="hobby-btn" data-hobby="Games"      aria-pressed="false"><span class="hobby-icon" aria-hidden="true">🎮</span>Games</button>
-            <button type="button" class="hobby-btn" data-hobby="Música"     aria-pressed="false"><span class="hobby-icon" aria-hidden="true">🎵</span>Música</button>
-            <button type="button" class="hobby-btn" data-hobby="Leitura"    aria-pressed="false"><span class="hobby-icon" aria-hidden="true">📚</span>Leitura</button>
-            <button type="button" class="hobby-btn" data-hobby="Culinária"  aria-pressed="false"><span class="hobby-icon" aria-hidden="true">🍳</span>Culinária</button>
-            <button type="button" class="hobby-btn" data-hobby="Esportes"   aria-pressed="false"><span class="hobby-icon" aria-hidden="true">🏃</span>Esportes</button>
-            <button type="button" class="hobby-btn" data-hobby="Arte"       aria-pressed="false"><span class="hobby-icon" aria-hidden="true">✏️</span>Arte</button>
-            <button type="button" class="hobby-btn" data-hobby="Viagens"    aria-pressed="false"><span class="hobby-icon" aria-hidden="true">✈️</span>Viagens</button>
-          </div>
-          <span id="erro-hobbies" class="form-error" role="alert" aria-live="polite"></span>
-        </div>
-
-        <!-- Botão de submit separado dos campos, type="button" para controle total pelo JS -->
-        <button type="button" class="btn-submit" id="btn-cadastrar" aria-label="Criar conta no Comunike">
-          Criar minha conta <span aria-hidden="true">→</span>
-        </button>
-
-        <p class="auth-footer-link">
-          Já tem conta? <a href="/login">Entrar agora</a>
-        </p>
-
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="nav-brand" aria-label="Comunike — página inicial">
+        <span class="brand-icon" aria-hidden="true">◈</span>
+        <span class="brand-name">Comunike</span>
+      </a>
+      <div class="header-usuario" id="header-usuario" aria-live="polite"></div>
+      <div class="header-actions">
+        <button class="btn-theme" id="btn-theme" type="button" aria-label="Alternar tema">◐</button>
+        <button class="btn-accent" id="btn-nova-sala" type="button" aria-haspopup="dialog">+ Nova sala</button>
       </div>
     </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="salas-main" role="main">
+
+    <section class="salas-topo" aria-label="Busca e filtros">
+      <form class="search-form" role="search" onsubmit="return false;">
+        <label for="inp-busca" class="sr-only">Buscar salas</label>
+        <input
+          type="search"
+          id="inp-busca"
+          name="busca"
+          class="search-input"
+          placeholder="🔍 Buscar salas..."
+          aria-label="Buscar salas por nome ou descrição"
+        >
+      </form>
+      <nav class="filtros-cats" aria-label="Filtrar por categoria">
+        <button class="cat-btn cat-btn--ativo" type="button" data-cat="todas"             aria-pressed="true">Todas</button>
+        <button class="cat-btn"                type="button" data-cat="Esportes"           aria-pressed="false">Esportes</button>
+        <button class="cat-btn"                type="button" data-cat="Tecnologia e games" aria-pressed="false">Games</button>
+        <button class="cat-btn"                type="button" data-cat="Arte e criatividade" aria-pressed="false">Arte</button>
+        <button class="cat-btn"                type="button" data-cat="Gastronomia"        aria-pressed="false">Gastronomia</button>
+        <button class="cat-btn"                type="button" data-cat="Conhecimento"       aria-pressed="false">Conhecimento</button>
+        <button class="cat-btn"                type="button" data-cat="Colecionismo"       aria-pressed="false">Colecionismo</button>
+      </nav>
+    </section>
+
+    <section aria-label="Lista de salas">
+      <ul class="salas-grid" id="salas-grid" role="list" aria-live="polite"></ul>
+      <div class="salas-vazio salas-vazio--oculto" id="salas-vazio" role="status">
+        Nenhuma sala encontrada. Que tal criar uma?
+      </div>
+    </section>
+
   </main>
 
-  <!-- MINI MODAL DE SUCESSO -->
-  <div class="modal-sucesso-overlay" id="modal-sucesso" role="dialog" aria-modal="true" aria-labelledby="sucesso-titulo" hidden>
-    <div class="modal-sucesso">
-      <div class="sucesso-icone" aria-hidden="true">🎉</div>
-      <h2 class="sucesso-titulo" id="sucesso-titulo">Conta criada!</h2>
-      <p class="sucesso-desc" id="sucesso-desc">Bem-vindo à Comunike. Redirecionando para as salas...</p>
-      <div class="sucesso-barra-wrap" aria-hidden="true">
-        <div class="sucesso-barra" id="sucesso-barra"></div>
+  <!-- MINI MODAL: NOVA / EDITAR SALA -->
+  <div class="mini-modal-overlay" id="mini-modal-sala" role="dialog" aria-modal="true" aria-labelledby="mini-modal-titulo" hidden>
+    <div class="mini-modal">
+
+      <div class="mini-modal-header">
+        <h2 class="mini-modal-titulo" id="mini-modal-titulo">Nova sala</h2>
+        <button class="mini-modal-fechar" id="mini-modal-fechar" type="button" aria-label="Fechar">✕</button>
       </div>
-      <a href="/salas" class="btn-submit" id="btn-ir-salas" aria-label="Ir para as salas agora">
-        Ir para as salas →
-      </a>
+
+      <div id="form-sala">
+
+        <div class="form-group">
+          <label for="sala-nome" class="form-label">Nome da sala</label>
+          <input
+            type="text"
+            id="sala-nome"
+            name="nome"
+            class="form-input"
+            maxlength="60"
+            placeholder="Ex: Fotografia analógica"
+            aria-required="true"
+          >
+          <span id="erro-sala-nome" class="form-error" role="alert" aria-live="polite"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="sala-desc" class="form-label">
+            Descrição <span class="form-label-opt">(opcional)</span>
+          </label>
+          <input
+            type="text"
+            id="sala-desc"
+            name="descricao"
+            class="form-input"
+            maxlength="120"
+            placeholder="Sobre o que é esta sala?"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="sala-cat" class="form-label">Categoria</label>
+          <div class="select-wrap">
+            <select id="sala-cat" name="categoria" class="form-select" aria-required="true">
+              <option value="">Selecione uma categoria</option>
+              <option value="Esportes">Esportes e movimento</option>
+              <option value="Tecnologia e games">Tecnologia e games</option>
+              <option value="Arte e criatividade">Arte e criatividade</option>
+              <option value="Gastronomia">Gastronomia e bem-estar</option>
+              <option value="Conhecimento">Conhecimento e cultura</option>
+              <option value="Colecionismo">Colecionismo e hobbies manuais</option>
+            </select>
+          </div>
+          <span id="erro-sala-cat" class="form-error" role="alert" aria-live="polite"></span>
+        </div>
+
+        <div class="mini-modal-acoes">
+          <button type="button" class="btn-ghost" id="btn-cancelar-modal">Cancelar</button>
+          <button type="button" class="btn-accent" id="btn-salvar-sala">Criar sala</button>
+        </div>
+
+      </form>
     </div>
   </div>
 
+  <!-- TOAST -->
   <div id="toast-container" role="region" aria-label="Notificações" aria-live="assertive"></div>
 
-  <script src="../js/theme.js"></script>
-  <script src="../js/utils.js"></script>
-  <script src="../js/cadastro.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/salas.js"></script>
 </body>
 </html>
